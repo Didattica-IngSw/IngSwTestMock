@@ -33,7 +33,7 @@ public class UserServiceImplTest {
         String hashedFakePassword = "Hashed Password1234";
         when(user.getPassword()).thenReturn(fakePassword);
         when(securityService.hash(fakePassword)).thenReturn(hashedFakePassword);
-
+        when(userDao.updateUser(any())).thenReturn(user);
         User userReturn = userService.assignPassword(user);
 
         verify(securityService).hash(fakePassword);
@@ -60,7 +60,7 @@ public class UserServiceImplTest {
     @Test
     public void shouldNotProceedFurtherWhenSecurityServiceThrowsException() throws Exception {
         when(securityService.hash(anyString())).thenThrow(Exception.class);
-        doThrow(IllegalArgumentException.class).when(user).setPassword("hashed password");
+      
         Exception ex = assertThrows(Exception.class, () -> {
             securityService.hash(anyString());
         });

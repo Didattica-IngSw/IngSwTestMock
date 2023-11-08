@@ -9,8 +9,9 @@ public class Main {
 
         UserDao userDao = new UserDao() {
             @Override
-            public void updateUser(User user) {
+            public User updateUser(User user) {
                 System.out.println("Fake user dao");
+                return user;
             }
         };
         SecurityService secService = new SecurityService() {

@@ -13,8 +13,7 @@ public class UserServiceImpl implements UserService {
     public User assignPassword(User user) throws Exception {
         String passwordMd5 = securityService.hash(user.getPassword());
         user.setPassword(passwordMd5);
-        userDao.updateUser(user);
-        return user;
+        return userDao.updateUser(user);
     }
 
 }
