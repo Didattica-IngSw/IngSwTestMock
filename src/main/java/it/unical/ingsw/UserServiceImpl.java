@@ -1,5 +1,7 @@
 package it.unical.ingsw;
 
+import java.util.Optional;
+
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
@@ -14,6 +16,14 @@ public class UserServiceImpl implements UserService {
         String passwordMd5 = securityService.hash(user.getPassword());
         user.setPassword(passwordMd5);
         return userDao.updateUser(user);
+    }
+
+    public String findUserEmail(String username) {
+        Optional<User> user = userDao.findByUsername(username);
+        if (user.isPresent()) {
+            return user.get().getEmail();
+        }
+        return null;
     }
 
 }

@@ -60,7 +60,7 @@ public class UserServiceImplTest {
     @Test
     public void shouldNotProceedFurtherWhenSecurityServiceThrowsException() throws Exception {
         when(securityService.hash(anyString())).thenThrow(Exception.class);
-      
+
         Exception ex = assertThrows(Exception.class, () -> {
             securityService.hash(anyString());
         });
